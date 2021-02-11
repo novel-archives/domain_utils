@@ -1,5 +1,12 @@
-[workspace]
+[package]
+name = "domain_utils"
+version = "0.1.0"
+authors = ["qwerty2501 <939468+qwerty2501@users.noreply.github.com>"]
+edition = "2018"
 
-members = [
-	"domains",
-]
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[dev-dependencies]
+test-case = "1.1.0"

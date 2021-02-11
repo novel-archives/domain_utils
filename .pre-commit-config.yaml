@@ -25,11 +25,13 @@ repos:
         name: cargo-clippy
         entry: scripts/git/hooks/pre-push/cargo_lint.sh
         language: script
+        pass_filenames: false
         stages:
           - push
       - id: cargo-test
         name: cargo-test
         entry: scripts/git/hooks/pre-push/cargo_test.sh
         language: script
+        pass_filenames: false
         stages:
           - push
