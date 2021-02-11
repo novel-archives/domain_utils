@@ -9,6 +9,9 @@ mod internal {
         pub fn new(raw_id: R) -> Self {
             Self(raw_id, PhantomData)
         }
+        pub fn raw_id(&self) -> &R {
+            &self.0
+        }
     }
 
     impl<T: ?Sized, R: PartialEq + Clone + fmt::Display + fmt::Debug> PartialEq for Id<T, R> {
@@ -66,6 +69,14 @@ mod internal {
         fn works_format<R: PartialEq + Clone + fmt::Display + fmt::Debug>(v1: R) -> String {
             let id = Id::<IdTag, R>::new(v1.clone());
             format!("{}", id)
+        }
+        #[test_case("hoge" => true)]
+        #[test_case("foo" => true)]
+        #[test_case(1 => true)]
+        #[test_case(2 => true)]
+        fn works_raw_id<R: PartialEq + Clone + fmt::Display + fmt::Debug>(v1: R) -> bool {
+            let id = Id::<IdTag, R>::new(v1.clone());
+            id.raw_id() == &v1
         }
     }
 }
