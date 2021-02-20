@@ -1,0 +1,27 @@
+[env]
+RUSTFLAGS="-D warnings"
+CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = true
+
+[tasks.clean]
+command = "cargo"
+args = ["clean"]
+
+[tasks.build]
+command = "cargo"
+args = ["build"]
+
+[tasks.lint]
+install_crate = { rustup_component_name = "clippy" }
+command = "cargo"
+args = ["clippy"]
+
+[tasks.test]
+command = "cargo"
+args = ["test"]
+dependencies = ["lint"]
+
+[tasks.pre-push]
+dependencies = [
+    "test",
+    "lint",
+]
