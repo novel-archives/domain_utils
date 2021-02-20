@@ -11,7 +11,7 @@ command = "cargo"
 args = ["build"]
 
 
-[tasks.run-clippy]
+[tasks.clippy]
 install_crate = { rustup_component_name = "clippy" }
 command = "cargo"
 args=["clippy","--","-D","clippy::all","-D","warnings"]
@@ -23,7 +23,7 @@ args=["fmt", "--", "--check"]
 
 [tasks.lint]
 dependencies=[
-	"run-clippy",
+	"clippy",
 	"fmtcheck",
 ]
 
