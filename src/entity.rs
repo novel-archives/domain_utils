@@ -1,7 +1,10 @@
 use super::*;
 
-pub trait Entity: PartialEq {
+pub trait Entity {
     fn id(&self) -> &Id<Self>;
+    fn same_identity_as(&self, that: &Self) -> bool {
+        self.id() == that.id()
+    }
 }
 
 #[cfg(test)]
@@ -16,11 +19,6 @@ mod tests {
     impl Entity for TestEntity {
         fn id(&self) -> &Id<Self> {
             &self.id
-        }
-    }
-    impl PartialEq for TestEntity {
-        fn eq(&self, other: &Self) -> bool {
-            self.id == other.id
         }
     }
 
@@ -41,6 +39,6 @@ mod tests {
         let e2 = TestEntity {
             id: Id::new(v2.to_string()),
         };
-        e1 == e2
+        e1.same_identity_as(&e2)
     }
 }
